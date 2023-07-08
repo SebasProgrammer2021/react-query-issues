@@ -16,14 +16,27 @@ export const IssueItem: FC<Props> = ({ issue }) => {
 
     //como se hacen muchas peticiones, tocaria manejar un tiempo mas largo en el refresh,
     // se jugaria con el cacheTime or staleTime
-    const onMouseEnter = () => {
+    const prefetchData = () => {
         queryClient.prefetchQuery(["issue", issue.number], () => getIssue(issue.number))
         queryClient.prefetchQuery(["issue", issue.number, "comments"], () => getIssueComments(issue.number))
     }
 
+    const preSetData = () => {
+        queryClient.setQueryData(
+            ["issue", issue.number],
+            issue, {
+            updatedAt: new Date().getTime() + 100000//para establecer que la info quede presca
+            //pro x cantidad de tiempo y no haga el refetch
+        }
+        )
+
+    }
+
     return (
         <div className="card mb-2 issue" onClick={() => navigate(`/issues/issue/${issue.number}`)}
-            onMouseEnter={onMouseEnter}>
+            // onMouseEnter={prefetchData}
+            onMouseEnter={preSetData}
+        >
             <div className="card-body d-flex align-items-center">
                 {issue.state === 'open'
                     ? <FiInfo size={30} color="red" />

@@ -1,12 +1,15 @@
 import { Issue } from '../interfaces';
+import { State } from '../interfaces/issue';
 import { IssueItem } from './IssueItem';
 import { FC } from 'react';
 
 interface Props {
     issues: Issue[]
+    state?: State
+    onStateChange: (state?: State) => void
 }
 
-export const IssueList: FC<Props> = ({ issues }) => {
+export const IssueList: FC<Props> = ({ issues, state, onStateChange }) => {
     return (
         <div className="card border-white">
             <div className="card-header bg-dark">
