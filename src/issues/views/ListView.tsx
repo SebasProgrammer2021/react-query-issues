@@ -8,7 +8,7 @@ import { State } from "../interfaces/issue";
 export const ListView = () => {
   const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
   const [issueState, setIssueState] = useState<State>()
-  const { issuesQuery } = useIssues()
+  const { issuesQuery } = useIssues({ issueState, selectedLabels })
 
   const onLabelChange = (labelName: string) => {
     // si existe lo remuevo o sino lo agrego
@@ -30,6 +30,12 @@ export const ListView = () => {
               state={issueState}
               onStateChange={(newState) => setIssueState(newState)} />
         }
+
+        <div className="d-flex mt-2 justify-content-between">
+          <button className="btn btn-outline-primary">Prev</button>
+          <span>1</span>
+          <button className="btn btn-outline-primary">Next</button>
+        </div>
       </div>
 
       <div className="col-4">

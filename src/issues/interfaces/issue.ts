@@ -123,5 +123,5 @@ export interface Reactions {
 
 export enum State {
   Open = "open",
-  Close = "closed",
+  Closed = "closed",
 }

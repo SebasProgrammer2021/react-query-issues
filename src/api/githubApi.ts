@@ -5,6 +5,6 @@ export const githubApi = axios.create({
   headers: {
     Authorization:
       "Bearer " +
-      "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",
+      "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",
   },
 });
